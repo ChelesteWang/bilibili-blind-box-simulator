@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>盲盒抽卡模拟器</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <h1>盲盒抽卡模拟器</h1>
+    <div class="card">
+      <h2>选择盲盒</h2>
+      <select id="boxType">
+        <option value="心动盲盒">心动盲盒</option>
+        <option value="星月盲盒">星月盲盒</option>
+        <option value="闪耀盲盒">闪耀盲盒</option>
+        <option value="至尊盲盒">至尊盲盒</option>
+        <option value="奇遇盲盒">奇遇盲盒</option>
+        <option value="大航海盲盒">大航海盲盒</option>
+        <option value="音符盲盒">音符盲盒</option>
+      </select>
+      <h2>选择抽卡次数</h2>
+      <select id="drawCount">
+        <option value="1">1 连抽</option>
+        <option value="10">10 连抽</option>
+        <option value="50">50 连抽</option>
+      </select>
+      <h2>选择倍率</h2>
+      <select id="multiplier">
+        <option value="1">1 倍</option>
+        <option value="1.5">1.5 倍</option>
+        <option value="2">2 倍</option>
+        <option value="3">3 倍</option>
+        <option value="4">4 倍</option>
+        <option value="5">5 倍</option>
+      </select>
+      <button onclick="drawCards()">抽卡</button>
+      <button onclick="clearRecords()">清空记录</button>
+      <!-- 新增的清空记录按钮 -->
+      <p id="result"></p>
+      <div id="drawRecords"></div>
+      <p>总抽取次数: <span id="totalDrawCount">0</span></p>
+      <p>总电池收益: <span id="totalProfit">0</span></p>
+      <p>总花费电池: <span id="totalSpent">0</span></p>
+      <p>总体盈亏: <span id="profitOrLoss">0</span></p>
+    </div>
+    <div>
+      <p>礼物列表</p>
+      <div id="giftList"></div>
+    </div>
+    <a href="https://space.bilibili.com/22739020" class="about-link"
+      >希望大家玩的开心抽个过瘾,求个免费的关注不过分吧,程序作者 B 站
+      ID：一只咸鱼卿</a
+    >
+    <div>
+      更多直播互动游戏敬请期待,喜欢的可以关注一下作者,私信你的好点子,可能就会被翻牌子欧
+    </div>
+  </body>
+  <script src="./script.js"></script>
+</html>

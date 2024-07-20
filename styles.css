@@ -1,0 +1,79 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f8f9fa;
+  text-align: center;
+}
+
+.card {
+  background-color: white;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  width: 350px;
+  margin: 0 auto;
+}
+
+h1 {
+  text-align: center;
+  margin-top: 30px;
+  color: #495057;
+  font-size: 28px;
+}
+
+select {
+  padding: 8px 15px;
+  font-size: 18px;
+  border: 2px solid #ced4da;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  background-color: #f8f9fa;
+}
+
+button {
+  padding: 12px 25px;
+  font-size: 20px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+#result {
+  font-size: 22px;
+  font-weight: bold;
+  margin-top: 25px;
+  color: #343a40;
+}
+
+#drawRecords {
+  margin-top: 25px;
+  font-size: 18px;
+  color: #6c757d;
+}
+
+#totalDrawCount,
+#totalProfit,
+#totalSpent,
+#profitOrLoss {
+  font-size: 20px;
+  margin-top: 15px;
+  color: #343a40;
+}
+
+.about-link {
+  margin-top: 30px;
+  font-size: 18px;
+  color: #007bff;
+  text-decoration: none;
+}
+
+.about-link:hover {
+  text-decoration: underline;
+}
+
