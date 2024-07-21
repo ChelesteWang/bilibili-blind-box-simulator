@@ -207,30 +207,33 @@ var video = document.getElementById("video");
 var canvas = document.getElementById("canvas");
 var ctx = canvas.getContext("2d");
 
-video.addEventListener("play", function () {
-  var draw = function () {
-    if (!video.paused && !video.ended) {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.drawImage(video, 0, 0, 720, 1080, 0, 0, canvas.width, canvas.height);
-      let originalFrame = ctx.getImageData(0, 0, canvas.width, canvas.height);
-      ctx.drawImage(video, 724, 0, 360, 540, 0, 0, canvas.width, canvas.height);
-      let alphaFrame = ctx.getImageData(0, 0, canvas.width, canvas.height);
-      console.log(originalFrame, alphaFrame);
-      for (var i = 0; i < originalFrame.data.length; i += 4) {
-        let alpha = alphaFrame.data[i] / 255; // 将灰度值转换为透明度
-        originalFrame.data[i] = originalFrame.data[i] * alpha; // 应用透明度到红色通道
-        originalFrame.data[i + 1] = originalFrame.data[i + 1] * alpha; // 应用透明度到绿色通道
-        originalFrame.data[i + 2] = originalFrame.data[i + 2] * alpha; // 应用透明度到蓝色通道
-        originalFrame.data[i + 3] = alpha * 255;
-      }
-      ctx.putImageData(originalFrame, 0, 0);
-      requestAnimationFrame(draw);
+
+function drawAnimation() {
+  if (!video.paused && !video.ended) {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.drawImage(video, 0, 0, 720, 1080, 0, 0, canvas.width, canvas.height);
+    let originalFrame = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    ctx.drawImage(video, 724, 0, 360, 540, 0, 0, canvas.width, canvas.height);
+    let alphaFrame = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    console.log(originalFrame, alphaFrame);
+    for (var i = 0; i < originalFrame.data.length; i += 4) {
+      let alpha = alphaFrame.data[i] / 255; // 将灰度值转换为透明度
+      originalFrame.data[i] = originalFrame.data[i] * alpha; // 应用透明度到红色通道
+      originalFrame.data[i + 1] = originalFrame.data[i + 1] * alpha; // 应用透明度到绿色通道
+      originalFrame.data[i + 2] = originalFrame.data[i + 2] * alpha; // 应用透明度到蓝色通道
+      originalFrame.data[i + 3] = alpha * 255;
     }
-  };
-  draw();
+    ctx.putImageData(originalFrame, 0, 0);
+    requestAnimationFrame(draw);
+  }
+}
+
+video.addEventListener("play", function () {
+  drawAnimation();
 });
 
 video.addEventListener("ended", function () {
+  console.log("Video ended");
   canvas.style.display = "none";
 });
 
