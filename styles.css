@@ -77,3 +77,16 @@ button:hover {
   text-decoration: underline;
 }
 
+#video {
+  display: none;
+}
+
+#canvas {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  max-width: 540px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: none;
+}

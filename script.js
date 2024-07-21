@@ -203,6 +203,37 @@ function generateMultiplierSelectOptions() {
   }
 }
 
+var video = document.getElementById("video");
+var canvas = document.getElementById("canvas");
+var ctx = canvas.getContext("2d");
+
+video.addEventListener("play", function () {
+  var draw = function () {
+    if (!video.paused && !video.ended) {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.drawImage(video, 0, 0, 720, 1080, 0, 0, canvas.width, canvas.height);
+      let originalFrame = ctx.getImageData(0, 0, canvas.width, canvas.height);
+      ctx.drawImage(video, 724, 0, 360, 540, 0, 0, canvas.width, canvas.height);
+      let alphaFrame = ctx.getImageData(0, 0, canvas.width, canvas.height);
+      console.log(originalFrame, alphaFrame);
+      for (var i = 0; i < originalFrame.data.length; i += 4) {
+        let alpha = alphaFrame.data[i] / 255; // 将灰度值转换为透明度
+        originalFrame.data[i] = originalFrame.data[i] * alpha; // 应用透明度到红色通道
+        originalFrame.data[i + 1] = originalFrame.data[i + 1] * alpha; // 应用透明度到绿色通道
+        originalFrame.data[i + 2] = originalFrame.data[i + 2] * alpha; // 应用透明度到蓝色通道
+        originalFrame.data[i + 3] = alpha * 255;
+      }
+      ctx.putImageData(originalFrame, 0, 0);
+      requestAnimationFrame(draw);
+    }
+  };
+  draw();
+});
+
+video.addEventListener("ended", function () {
+  canvas.style.display = "none";
+});
+
 function clearRecords() {
   drawRecords = {};
   totalDrawCount = 0;
@@ -238,6 +269,11 @@ function drawCards() {
 
       if (randomNumber < cumulativeProbability) {
         records.push(item);
+        if (item === "浪漫城堡") {
+          canvas.style.display = "block";
+          video.play();
+          alert(`恭喜你获得浪漫城堡！`);
+        }
         if (drawRecords[item]) {
           drawRecords[item]++;
         } else {
